@@ -1,0 +1,64 @@
+## Issues with the Code
+
+There are **no critical issues** - this code will run successfully! However, there's one minor point:
+- The `<p id="demo"></p>` element isn't being used. The output goes to the browser console, not the webpage.
+
+## How to Run This Code
+
+**Method 1: Save and Open in Browser**
+1. Copy the code into a text editor (Notepad, VS Code, etc.)
+2. Save it as `test.html`
+3. Double-click the file to open it in your browser
+4. Press `F12` (or right-click → "Inspect") to open Developer Tools
+5. Click the "Console" tab to see the output
+
+**Method 2: Quick Test in Browser**
+1. Open any browser
+2. Press `F12` to open Developer Tools
+3. Go to the "Console" tab
+4. Paste just the JavaScript part (everything between `<script>` tags)
+5. Press Enter
+
+## Beginner-Level Explanation
+
+This code demonstrates **prototypal inheritance** in JavaScript - a way for objects to share properties and methods.
+
+### Breaking It Down:
+
+**1. Creating a Template Object**
+```javascript
+const Animal = {
+    type: "Invertebrates",
+    displayType() {
+        console.log(this.type)
+    }
+}
+```
+Think of `Animal` as a blueprint. It has a `type` property and a `displayType` method that prints the type.
+
+**2. Creating animal1**
+```javascript
+const animal1 = Object.create(Animal)
+animal1.displayType()  // Outputs: "Invertebrates"
+```
+- `Object.create(Animal)` creates a new object that "inherits" from `Animal`
+- `animal1` doesn't have its own `type` property, so it looks up to its "parent" (`Animal`) and finds `"Invertebrates"`
+
+**3. Creating fish**
+```javascript
+const fish = Object.create(Animal)
+fish.type = "Fishes"
+fish.displayType()  // Outputs: "Fishes"
+```
+- `fish` also inherits from `Animal`
+- But we give `fish` its **own** `type` property with value `"Fishes"`
+- Now when `displayType()` runs, it finds `fish`'s own `type` first, so it prints `"Fishes"`
+
+### The Key Concept:
+When you look for a property on an object, JavaScript first checks the object itself. If it doesn't find it there, it looks at the "parent" object (the prototype). This is called the **prototype chain**.
+
+**Output you'll see in console:**
+```
+Invertebrates
+Fishes
+```
