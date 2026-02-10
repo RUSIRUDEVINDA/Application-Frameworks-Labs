@@ -1,0 +1,101 @@
+EXPLANATION: Destructuring.html
+==================================
+
+This code demonstrates array destructuring - extracting values from an array and assigning them to separate variables in a concise way.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Define a function that returns multiple values
+    function calculate(a, b) {
+    - This function takes two parameters: a and b
+    - It will return multiple calculated results
+
+Step 2: Calculate different operations
+    const add = a + b;
+    const subtract = a - b;
+    const multiply = a * b;
+    const divide = a / b;
+    - Performs four mathematical operations
+    - Stores each result in a separate variable
+
+Step 3: Return results as an array
+    return [add, subtract, multiply, divide];
+    - Returns an array containing all four results
+    - The array elements correspond to: [sum, difference, product, quotient]
+
+Step 4: Call the function and destructure the result
+    const [add, subtract, multiply, divide] = calculate(4, 7);
+    
+    This line does several things:
+    
+    a) calculate(4, 7) is called
+       - a = 4, b = 7
+       - Calculates: add=11, subtract=-3, multiply=28, divide=0.571...
+       - Returns: [11, -3, 28, 0.571...]
+    
+    b) [add, subtract, multiply, divide] = ... is DESTRUCTURING
+       - Instead of storing the entire array in one variable
+       - It splits the array and assigns each element to separate variables
+       - add = 11 (first array element)
+       - subtract = -3 (second array element)
+       - multiply = 28 (third array element)
+       - divide = 0.571... (fourth array element)
+
+Step 5: Display the results
+    document.write("<p>Sum: " + add + "</p>");
+    document.write("<p>Difference " + subtract + "</p>");
+    document.write("<p>Product: " + multiply + "</p>");
+    document.write("<p>Quotient " + divide + "</p>");
+    - Writes each result as a paragraph to the HTML page
+    - Uses the individual variables created by destructuring
+
+DETAILED CALCULATION EXAMPLE (with a=4, b=7):
+==============================================
+    add = 4 + 7 = 11
+    subtract = 4 - 7 = -3
+    multiply = 4 * 7 = 28
+    divide = 4 / 7 = 0.5714285714...
+
+COMPARISON: WITH vs WITHOUT DESTRUCTURING
+===========================================
+
+WITHOUT DESTRUCTURING (traditional way):
+    const result = calculate(4, 7);
+    const add = result[0];        // Access by index [0]
+    const subtract = result[1];   // Access by index [1]
+    const multiply = result[2];   // Access by index [2]
+    const divide = result[3];     // Access by index [3]
+
+WITH DESTRUCTURING (modern way):
+    const [add, subtract, multiply, divide] = calculate(4, 7);
+
+Destructuring is cleaner and more readable!
+
+KEY CONCEPTS:
+=============
+- Array destructuring: Extracting array elements into separate variables
+- Destructuring assignment: Assigning array values to specific variable names
+- Position matters: First array element → first variable, etc.
+- Only needed elements can be extracted
+- Can skip elements: const [first, , third] = array; skips second element
+
+EXECUTION STEPS:
+================
+1. calculate(4, 7) is called
+2. Function calculates four operations (11, -3, 28, ~0.571)
+3. Function returns the array [11, -3, 28, 0.5714...]
+4. Destructuring assignment unpacks the array:
+   - add ← 11
+   - subtract ← -3
+   - multiply ← 28
+   - divide ← 0.5714...
+5. Each value is now in its own variable
+6. document.write() displays each value
+
+OUTPUT:
+=======
+Sum: 11
+Difference -3
+Product: 28
+Quotient 0.5714285714285714

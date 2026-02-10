@@ -1,0 +1,44 @@
+EXPLANATION: ArrayMethod.html
+================================
+
+This code demonstrates the Array.map() method in JavaScript.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Create an array
+    const array1 = [1, 4, 9, 16];
+    - Creates an array containing four numbers
+    - Each number is stored in memory
+
+Step 2: Use the map() method
+    const map1 = array1.map(x => x * 2);
+    - map() iterates through each element in array1
+    - For each element (x), it applies the arrow function: x * 2
+    - This multiplies each element by 2
+    - It creates a NEW array with the transformed values
+    - Original array1 remains unchanged
+
+Step 3: Display the result
+    document.getElementById("demo").innerHTML = map1;
+    - Finds the HTML element with id "demo"
+    - Inserts the result into that element's innerHTML
+    - Result: [2, 8, 18, 32]
+
+WHAT HAPPENS:
+=============
+    1 * 2 = 2
+    4 * 2 = 8
+    9 * 2 = 18
+    16 * 2 = 32
+
+KEY CONCEPTS:
+=============
+- map() is a higher-order function (takes a function as parameter)
+- Arrow function (=>) is a concise way to write functions
+- map() returns a new array without modifying the original
+- This is functional programming style
+
+OUTPUT:
+=======
+2,8,18,32

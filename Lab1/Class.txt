@@ -1,0 +1,85 @@
+EXPLANATION: Class.html
+==========================
+
+This code demonstrates JavaScript classes, constructors, inheritance (extends), and the 'this' keyword.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Define the parent class (Car)
+    class Car {
+        constructor(name) {
+            this.brand = name;
+        }
+    - Creates a blueprint for a Car object
+    - constructor() is called when a new Car is created
+    - 'this.brand' stores the name parameter as a property of the object
+    - Example: If name="Ford", then this.brand="Ford"
+
+Step 2: Add a method to the Car class
+    present() {
+        return 'I have a ' + this.brand;
+    }
+    - Defines a method that uses 'this' to access the object's brand property
+    - Returns a string containing the brand
+
+Step 3: Define the child class (Model) that extends Car
+    class Model extends Car {
+    - Model inherits all properties and methods from Car
+    - 'extends' keyword means Model is a subclass of Car
+
+Step 4: Add constructor to Model class
+    constructor(name, mod) {
+        super(name)
+        this.model = mod
+    }
+    - super(name) calls the parent class (Car) constructor
+    - Passes the 'name' to Car's constructor
+    - 'this.model = mod' adds a new property specific to Model
+    - Example: If mod="Mustang", then this.model="Mustang"
+
+Step 5: Add method to Model class
+    show() {
+        return this.present() + ', it is a ' + this.model;
+    }
+    - Calls the inherited method present() from Car
+    - Adds additional text including the model property
+    - Returns combined string
+
+Step 6: Create an instance and call the method
+    const mymodel = new Model("Ford", "Mustang");
+    - Creates a new Model object
+    - Passes "Ford" as the brand and "Mustang" as the model
+    - mymodel.brand = "Ford" (from Car constructor via super)
+    - mymodel.model = "Mustang" (from Model constructor)
+
+Step 7: Display the result
+    document.write(mymodel.show());
+    - Calls the show() method on the mymodel object
+    - Displays the result on the web page
+
+EXECUTION FLOW:
+===============
+1. new Model("Ford", "Mustang") is called
+2. Model's constructor runs:
+   - super("Ford") calls Car's constructor
+   - Car's constructor sets this.brand = "Ford"
+   - this.model = "Mustang" is set
+3. mymodel.show() is called:
+   - Calls this.present() → returns "I have a Ford"
+   - Adds ", it is a " + this.model → adds ", it is a Mustang"
+   - Returns: "I have a Ford, it is a Mustang"
+4. document.write() displays this string
+
+KEY CONCEPTS:
+=============
+- class: Blueprint for objects
+- constructor: Special method that runs when an object is created
+- extends: Inheritance - child class gets parent's methods/properties
+- super: Calls parent class's constructor
+- this: Refers to the current object
+- Methods: Functions that belong to an object
+
+OUTPUT:
+=======
+I have a Ford, it is a Mustang

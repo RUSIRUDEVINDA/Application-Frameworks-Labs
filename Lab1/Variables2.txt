@@ -1,0 +1,171 @@
+EXPLANATION: Variables2.html
+==============================
+
+This code demonstrates the behavior of 'const' variables and how const prevents reassignment but allows property mutation.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Create a const object
+    const a = {
+        prop1: 10,
+        prop2: 9
+    }
+    
+    - Declares variable 'a' using 'const'
+    - Assigns an object with two properties
+    - prop1 = 10
+    - prop2 = 9
+    - 'const' means the variable itself cannot be reassigned
+    - However, the object's contents can be modified
+
+Step 2: Modify a property of the const object
+    a.prop1 = 3
+    
+    What happens:
+    - This line MODIFIES the object's property
+    - It doesn't reassign the 'a' variable itself
+    - So this is ALLOWED with const
+    - After this: a = {prop1: 3, prop2: 9}
+    - Note: Memory address of object 'a' stays the same
+    - We're just changing what's inside the object
+
+    // It is allowed - comment confirms this works
+
+Step 3: Try to reassign the const variable
+    const b = {
+        b: 10,
+        prop2: 9
+    }
+    
+    What happens:
+    - Declares a new const object 'b'
+    - Assigns properties to it
+    - But there's nothing after this to show the problem...
+    - However, if you tried something like:
+    
+    b = { new: 'object' }
+    
+    This would cause an error:
+    "TypeError: Assignment to constant variable."
+    
+    // It is not allowed - comment explains reassignment is not permitted
+
+CONST BEHAVIOR COMPARISON:
+==========================
+
+MODIFYING PROPERTIES (ALLOWED):
+    const obj = {x: 1, y: 2};
+    obj.x = 5;           // ✓ ALLOWED - modify property
+    obj.z = 3;           // ✓ ALLOWED - add new property
+    obj['x'] = 10;       // ✓ ALLOWED - modify with bracket notation
+    Result: obj = {x: 10, y: 2, z: 3}
+
+REASSIGNING VARIABLE (NOT ALLOWED):
+    const obj = {x: 1, y: 2};
+    obj = {x: 5};        // ✗ ERROR - cannot reassign
+    obj = null;          // ✗ ERROR - cannot reassign
+    obj = obj;           // ✗ ERROR - cannot reassign
+
+CONST VS LET VS VAR:
+====================
+
+CONST:
+    - Block-scoped
+    - Cannot be reassigned
+    - Cannot be redeclared
+    - Must be initialized
+    - Object/Array contents CAN be modified
+    - Preferred for values that don't change reference
+
+LET:
+    - Block-scoped
+    - CAN be reassigned
+    - Cannot be redeclared
+    - Can be declared without initialization
+    - Use when variable will change
+
+VAR:
+    - Function-scoped
+    - CAN be reassigned
+    - CAN be redeclared
+    - Hoisted and initialized
+    - Avoid in modern JavaScript
+
+MEMORY CONCEPT:
+===============
+When you do:
+    const a = {prop1: 10, prop2: 9};
+
+JavaScript stores:
+    Variable name 'a' → Points to Memory Address #5000
+    Memory Address #5000 → Contains {prop1: 10, prop2: 9}
+
+When you do:
+    a.prop1 = 3;
+
+JavaScript:
+    Variable name 'a' → Still points to Memory Address #5000
+    Memory Address #5000 → Now contains {prop1: 3, prop2: 9}
+    
+The memory address doesn't change, just the data at that address.
+
+If you try:
+    a = {new: 'object'};
+
+JavaScript would need to:
+    Variable name 'a' → Point to Memory Address #5001
+    
+But const prevents this - can't change what 'a' points to!
+
+WHY USE CONST?
+==============
+- Prevents accidental reassignment
+- Makes intent clear: "This variable's reference won't change"
+- Safer default - most variables don't need reassignment
+- Helps catch bugs - get error if you accidentally reassign
+- Better for objects/arrays that will have content modified
+
+MODERN BEST PRACTICES:
+======================
+1. Use const by default
+2. Use let only if reassignment is needed
+3. Avoid var entirely in modern code
+
+EXECUTION FLOW:
+===============
+1. const a = {...} creates object 'a' in memory
+2. a.prop1 = 3 modifies the object's property
+3. a.prop1 is now 3 instead of 10
+4. const b = {...} creates object 'b'
+5. If code tried to reassign a or b, it would throw an error
+
+KEY CONCEPTS:
+=============
+- const: Prevents variable reassignment
+- Mutation: Changing object/array contents (allowed with const)
+- Reassignment: Changing what variable points to (not allowed with const)
+- Reference: Memory location of an object
+- Block scope: Accessible within { } block
+- Immutability: Cannot change (for the variable reference itself)
+
+EXAMPLES OF WHAT FAILS WITH CONST:
+===================================
+const arr = [1, 2, 3];
+
+arr.push(4);           // ✓ WORKS - modifying array
+arr[0] = 99;           // ✓ WORKS - modifying array element
+arr = [5, 6, 7];       // ✗ ERROR - reassigning array variable
+arr = null;            // ✗ ERROR - reassigning array variable
+
+const str = "hello";
+str = "goodbye";       // ✗ ERROR - cannot reassign
+
+WHY THIS MATTERS:
+=================
+This code demonstrates why understanding const is important:
+- Common misconception: "const = cannot change"
+- Reality: "const = cannot change what variable refers to"
+- You CAN change the contents of a const object/array
+- You CANNOT change what the variable points to
+- This distinction is crucial for JavaScript development

@@ -1,0 +1,136 @@
+EXPLANATION: Variables1.html
+==============================
+
+This code demonstrates the scope of 'var' variables and how hoisting affects them.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Declare global variable
+    let a = 10;
+    - Creates variable 'a' in global scope with value 10
+    - This is declared at the top level, outside any function
+
+Step 2: Define a function
+    function f() {
+    - Creates a function that will be called later
+    - Opens a new functional scope
+
+Step 3: Create an if statement block
+    if (true) {
+    - The condition is always true, so the block will always execute
+    - Note: 'var' doesn't respect block scope (this is important!)
+
+Step 4: Declare var variable inside the if block
+    var b = 9
+    - Declares variable 'b' using 'var'
+    - Assigned value 9
+    - Important: Because it's a 'var', it's not block-scoped
+    - 'var' is function-scoped, not block-scoped
+    - This means 'b' becomes available to the entire function f()
+    - Not just inside the if block!
+
+Step 5: Log b inside the if block
+    console.log(b);
+    - This is inside the if block
+    - Accesses 'b' (declared on the same level)
+    - Outputs: 9
+
+Step 6: Log b outside the if block (but inside the function)
+    console.log(b);
+    - This is OUTSIDE the if block, but INSIDE function f()
+    - You might expect an error, but...
+    - Because 'var b' was declared in the if block, it's hoisted
+    - Hoisting moves the variable declaration to the top of the function
+    - The variable 'b' is accessible throughout the entire function f()
+    - It was assigned 9 in the if block, so it still has that value
+    - Outputs: 9
+
+Step 7: Call the function
+    f()
+    - Executes the function
+    - First console.log(b): Outputs 9 (inside if block)
+    - Second console.log(b): Outputs 9 (outside if block but in function)
+
+Step 8: Log the global variable
+    console.log(a)
+    - This is OUTSIDE the function
+    - 'a' is a global variable with value 10
+    - Outputs: 10
+
+VAR HOISTING EXPLAINED:
+=======================
+What the code looks like to JavaScript:
+
+    function f() {
+        var b;              // Declaration is hoisted to top
+        if (true) {
+            b = 9;          // Assignment stays where it is
+            console.log(b);
+        }
+        console.log(b);
+    }
+
+The 'var b' declaration is moved to the top of the function, but the assignment stays.
+This is called HOISTING.
+
+'VAR' VS 'LET' VS 'CONST':
+==========================
+
+VAR (function-scoped):
+    - Scoped to the entire function
+    - Can be redeclared
+    - Hoisted and initialized with undefined
+    - Can be accessed before declaration (gives undefined)
+    - Should be avoided in modern JavaScript
+
+LET (block-scoped):
+    - Scoped to the nearest enclosing block (if, for, while, etc.)
+    - Cannot be redeclared in same scope
+    - Hoisted but not initialized (Temporal Dead Zone)
+    - Cannot be accessed before declaration (error)
+    - Preferred in modern JavaScript
+
+CONST (block-scoped):
+    - Like let, but cannot be reassigned
+    - Must be initialized when declared
+    - Good for values that shouldn't change
+
+KEY CONCEPTS:
+=============
+- Scope: The region where a variable is accessible
+- Function scope: Variable accessible throughout the entire function
+- Block scope: Variable accessible only within the block { }
+- Hoisting: Declaration moved to top, initialization stays in place
+- Temporal Dead Zone: Time between block start and declaration (for let/const)
+
+EXECUTION FLOW:
+===============
+1. a = 10 is created in global scope
+2. f() is called
+3. Hoisting occurs: var b declaration moved to top of function
+4. if (true) block executes:
+   - b = 9 is assigned
+   - console.log(b) outputs 9
+5. After if block:
+   - console.log(b) outputs 9 (b still has value from if block)
+6. f() finishes
+7. console.log(a) outputs 10 (global variable)
+
+CONSOLE OUTPUT:
+===============
+9
+9
+10
+
+(Visible in browser console - press F12)
+
+IMPORTANT NOTE:
+===============
+If you used 'let' instead of 'var':
+    let b = 9;
+    
+The code would give an error on the second console.log(b)
+because 'let' is block-scoped and wouldn't exist outside the if block.
+
+This demonstrates why 'let' is better - it prevents accidental cross-scope access.

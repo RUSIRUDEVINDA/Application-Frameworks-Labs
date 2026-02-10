@@ -1,0 +1,130 @@
+EXPLANATION: JsonPlaceholderApi.html
+======================================
+
+This code demonstrates using the Fetch API to make HTTP requests and working with JSON data from an API.
+
+STEP-BY-STEP BREAKDOWN:
+=======================
+
+Step 1: Understand what an API is
+    API = Application Programming Interface
+    - A way for applications to communicate with each other
+    - Allows you to request data from a server
+    - JSON Placeholder is a free fake API for testing
+    - URL: https://jsonplaceholder.typicode.com/
+
+Step 2: Make a fetch request
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    - fetch() makes an HTTP GET request to the specified URL
+    - URL: https://jsonplaceholder.typicode.com/todos/1
+    - Requests the first "todo" item from the fake API
+    - fetch() returns a Promise (asynchronous operation)
+    - The request is sent to the server and we wait for a response
+
+Step 3: Handle the response
+    .then(response => response.json())
+    
+    After the server responds:
+    - .then() waits for the response to arrive
+    - response => is an arrow function that receives the response
+    - response.json() converts the response from JSON text format into a JavaScript object
+    - This step parses the raw data into usable format
+    - Returns another Promise containing the parsed data
+
+Step 4: Process the data
+    .then(json => console.log(json))
+    
+    After the JSON is parsed:
+    - .then() receives the parsed data
+    - json => is an arrow function that receives the data object
+    - console.log(json) outputs the data to the browser console
+    - You can view this by pressing F12 and opening the console tab
+
+WHAT DATA YOU GET:
+===================
+The API returns something like:
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+
+This is JSON (JavaScript Object Notation) format - a standard way to represent data.
+
+PROMISE CHAIN EXPLANATION:
+==========================
+fetch() returns a Promise
+    ↓
+Promise resolves with response object
+    ↓
+.then(response => response.json())
+    ↓
+json() converts response to JavaScript object (returns another Promise)
+    ↓
+Promise resolves with the actual data
+    ↓
+.then(json => console.log(json))
+    ↓
+Logs the data to console
+
+WHAT IS FETCH?
+==============
+fetch() is a modern JavaScript function for making HTTP requests
+- Replaces older XMLHttpRequest method
+- Built into modern browsers
+- Returns a Promise (doesn't block/wait, allows other code to run)
+- Can be used for GET, POST, PUT, DELETE requests
+- Handles both success and error responses
+
+WHY USE ASYNC (PROMISES)?
+==========================
+- Making network requests takes time
+- Synchronous (waiting) would freeze the page
+- Asynchronous (Promises) allows the page to remain responsive
+- Other code can continue running while request is in progress
+- When response arrives, the .then() callback is executed
+
+ERROR HANDLING (OPTIONAL):
+==========================
+To handle errors, you could add:
+    .catch(error => console.error('Error:', error))
+
+This catches any network errors or issues with the request.
+
+KEY CONCEPTS:
+=============
+- API: Service that provides data
+- Fetch: Browser function for making HTTP requests
+- Promise: Object representing asynchronous operation
+- JSON: Text format for data (becomes JavaScript object when parsed)
+- .then(): Waits for Promise to resolve, runs callback function
+- Arrow function (=>): Concise function syntax used in Promises
+
+URL BREAKDOWN:
+==============
+https://jsonplaceholder.typicode.com/todos/1
+- https: Secure protocol
+- jsonplaceholder.typicode.com: Domain name (API service)
+- /todos: Resource type (we want todos)
+- /1: Specific todo with ID 1
+
+JSON PLACEHOLDER ENDPOINTS:
+===========================
+/posts - Fake blog posts
+/comments - Fake comments
+/albums - Fake albums
+/photos - Fake photos
+/todos - Fake todo items
+/users - Fake users
+
+CONSOLE OUTPUT (Example):
+=========================
+{
+  userId: 1,
+  id: 1,
+  title: "delectus aut autem",
+  completed: false
+}
+
+(Visible in browser console - press F12)
